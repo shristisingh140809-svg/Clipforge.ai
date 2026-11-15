@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClipForge AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="brand">
+      <span class="brand-mark">CF</span>
+      <span>ClipForge <b>AI</b></span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">VIDEO TO SHORTS</p>
+      <h1>Make more from<br><span>every moment.</span></h1>
+      <p class="intro">Upload a video and create short, vertical clips with automatically generated captions.</p>
+    </section>
+
+    <section class="panel">
+      <form method="post" enctype="multipart/form-data">
+        <label class="field-label" for="video">Choose your video</label>
+        <input id="video" name="video" type="file" accept="video/*" required>
+
+        <label class="field-label" for="style">Caption style</label>
+        <select id="style" name="style">
+          <option value="classic">Classic white</option>
+          <option value="yellow">Yellow highlight</option>
+          <option value="clean">Clean</option>
+          <option value="bold">Bold yellow</option>
+        </select>
+
+        <label class="field-label" for="count">Number of clips</label>
+        <select id="count" name="count">
+          <option value="3">3 clips</option>
+          <option value="5">5 clips</option>
+          <option value="8">8 clips</option>
+        </select>
+
+        <button type="submit">Create my clips →</button>
+      </form>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="notice" role="alert">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </section>
+
+    <p class="fine-print">Processing may take a while. Only upload videos you have permission to edit.</p>
+  </main>
+</body>
+  </html>
+  
