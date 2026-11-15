@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your clips — ClipForge AI</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body><main class="shell">
+<nav><a class="brand" href="/"><span class="logo">✂</span> ClipForge <b>AI</b></a><span class="tag">YOUR CLIPS ARE READY</span></nav>
+<section class="hero"><div class="eyebrow">PROCESSING COMPLETE</div><h1>Your clips are <span>ready.</span></h1>
+<p>Detected spoken language: {{ language }}. Download your vertical videos below.</p></section>
+<div class="results">
+{% for clip in clips %}
+  <article class="clip-card"><div class="clip-top"><span>CLIP {{ loop.index }}</span><span>{{ clip.start }}s – {{ clip.end }}s</span></div>
+  <p>{{ clip.preview }}</p><a class="download" href="{{ url_for('download', filename=clip.filename) }}">Download MP4 ↓</a></article>
+{% endfor %}
+</div><a class="back" href="/">← Create more clips</a>
+<footer>ClipForge AI · Starter project</footer></main></body></html>

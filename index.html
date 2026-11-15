@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClipForge AI — Turn long videos into shorts</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <nav><div class="brand"><span class="logo">✂</span> ClipForge <b>AI</b></div><span class="tag">YOUR AI CLIPPING STUDIO</span></nav>
+    <section class="hero">
+      <div class="eyebrow">LONG VIDEO IN. SHORTS OUT.</div>
+      <h1>Turn long videos into<br><span>scroll-stopping clips.</span></h1>
+      <p>Upload a video, choose your caption look, and let ClipForge create vertical clips with synced subtitles.</p>
+    </section>
+    {% with messages = get_flashed_messages() %}{% if messages %}
+      <div class="alert">{% for message in messages %}{{ message }}{% endfor %}</div>
+    {% endif %}{% endwith %}
+    <form class="panel" method="post" enctype="multipart/form-data">
+      <label class="upload" for="video">
+        <div class="upload-icon">↑</div><h2>Upload your long video</h2>
+        <p>MP4, MOV, MKV, WEBM or AVI · up to 1 GB</p>
+        <input id="video" name="video" type="file" accept="video/*" required>
+        <span class="file-name" id="file-name">Choose a video from your device</span>
+      </label>
+      <div class="controls">
+        <div><label for="style">Subtitle style</label>
+          <select name="style" id="style">
+            <option value="classic">Classic white</option>
+            <option value="yellow">Yellow highlight</option>
+            <option value="clean">Minimal clean</option>
+            <option value="bold">Bold creator style</option>
+          </select>
+        </div>
+        <div><label for="count">Number of clips</label>
+          <select name="count" id="count">
+            <option value="1">1 clip</option><option value="3" selected>3 clips</option>
+            <option value="5">5 clips</option><option value="8">8 clips</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit">Generate my clips <span>→</span></button>
+      <p class="fine">Processing runs locally on your computer. Longer videos can take several minutes.</p>
+    </form>
+    <footer>ClipForge AI · Starter project · Only upload videos you have permission to use.</footer>
+  </main>
+  <script>
+    document.getElementById('video').addEventListener('change', function () {
+      document.getElementById('file-name').textContent =
+        this.files.length ? this.files[0].name : 'Choose a video from your device';
+    });
+  </script>
+</body></html>
