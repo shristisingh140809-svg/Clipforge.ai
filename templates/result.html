@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Clips — ClipForge AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="brand">
+      <span class="brand-mark">CF</span>
+      <span>ClipForge <b>AI</b></span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">YOUR EXPORTS</p>
+      <h1>Your clips are<br><span>ready.</span></h1>
+      <p class="intro">Detected language: {{ language }}. Download your clips below.</p>
+    </section>
+
+    <section class="panel">
+      {% if clips %}
+        <div class="clip-list">
+          {% for clip in clips %}
+            <article class="clip">
+              <div>
+                <h2>Clip {{ loop.index }}</h2>
+                <p class="clip-time">{{ clip.start }}s – {{ clip.end }}s</p>
+                <p class="clip-preview">{{ clip.preview }}</p>
+              </div>
+              <a class="download" href="{{ url_for('download', filename=clip.filename) }}">Download MP4</a>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No clips were created. Try another video.</p>
+      {% endif %}
+      <a class="secondary-link" href="{{ url_for('index') }}">← Create more clips</a>
+    </section>
+    <p class="fine-print">Keep a copy of your downloaded clips.</p>
+  </main>
+</body>
+</html>
